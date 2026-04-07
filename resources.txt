@@ -6,3 +6,9 @@ https://docs.djangoproject.com/en/6.0/intro/tutorial01/
 
 2- create our first template
 https://docs.djangoproject.com/en/6.0/topics/templates/
+
+3- static
+https://docs.djangoproject.com/en/6.0/howto/static-files/deployment/
+
+4- collect static
+https://docs.djangoproject.com/en/6.0/ref/contrib/staticfiles/

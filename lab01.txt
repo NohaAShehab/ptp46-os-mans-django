@@ -1,0 +1,35 @@
+
+
+lab01:
+1- install django
+2- create django project bookstore
+the project have 4 applications
+    -> books
+    -> authors
+    -> contactus
+    -> aboutus
+
+for each app create :
+    books :
+        index --> display all books
+            book_info -> id,title, breif, image, no_of_page , price
+        show --> display book information
+
+    authors:
+        landing page for all authors > (any content)
+
+    contactus:
+        contact us (static page)
+
+    aboutus:
+        aboutus page (static page)
+
+
+    Hints:
+        using template inheritance and url naming is a must
+        the beautiful design is a must  ((use AI ))
+        clean code in function naming, files name is a must
+
+
+  bonus
+    modify the desing page of 404

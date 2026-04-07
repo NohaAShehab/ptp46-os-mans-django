@@ -12,9 +12,9 @@ def hello_world(request):
 
 
 students = [
-    {"id": 1, "name": "Mohamed Waleed", "salary": 150000},
-    {"id": 2, "name": "Karim", "salary": 20000},
-    {"id": 3, "name": "Abdelhamid", "salary": 30000},
+    {"id": 1, "name": "Mohamed Waleed", "salary": 150000, "image": "pic1.jpeg"},
+    {"id": 2, "name": "Karim", "salary": 20000, "image": "pic2.jpeg"},
+    {"id": 3, "name": "Abdelhamid", "salary": 30000, "image": "pic3.jpeg"},
 ]
 #
 # def index(request):
@@ -36,6 +36,28 @@ students = [
 #     return HttpResponse("Not found")
 
 
+#
+# def profile(request, id ):
+#     # <int:id> === do the required casting
+#     student  = filter(lambda std:std['id'] == id, students) # filter object
+#     print(student)
+#     student = list(student)
+#     print(student)
+#     if student:
+#         return HttpResponse(student[0])
+#
+#     return HttpResponse("Not found")
+
+
+def index(request):
+    # return HttpResponse(students)
+    # send the students to the html page  --> dynamic content
+    # return template index.html
+    return render(request, "students/index.html",
+                  context={'students': students} )
+
+
+
 
 def profile(request, id ):
     # <int:id> === do the required casting
@@ -44,19 +66,9 @@ def profile(request, id ):
     student = list(student)
     print(student)
     if student:
-        return HttpResponse(student[0])
+        return render(request, "students/show.html", context={'student': student[0]})
 
     return HttpResponse("Not found")
-
-
-def index(request):
-    # return HttpResponse(students)
-    # return template index.html
-    return render(request, "students/index.html")
-
-
-
-
 
 
 

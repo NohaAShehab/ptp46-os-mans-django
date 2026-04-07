@@ -1,0 +1,12 @@
+{% extends 'layouts/base.html'%}
+{% load static %}
+{% block content %}
+
+    {{student.id}}
+{{student.name}}
+{{student.salary}}
+
+{{student.image}}
+
+<img src="{% static 'students/images/pic1.jpeg' %}">
+{% endblock %}
