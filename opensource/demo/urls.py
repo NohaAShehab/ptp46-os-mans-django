@@ -17,13 +17,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from departments.views import  landing
 from students.views import hello_world, index, profile
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # students
     path('hello',hello_world, name='hello_world'),
     path('index/', index, name='index'),
     # path('profile/<id>', profile, name='profile'),
     path('profile/<int:id>', profile, name='profile'),
+
+    # departments
+    path('landing/', landing, name='landing'),
 
 ]
