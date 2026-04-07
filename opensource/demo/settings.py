@@ -28,7 +28,9 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
-# Application definition
+# Application definition in installed apps
+# when you request template, runmigration or someting related to the django operation
+# the django --> can do these operations for only the installed apps
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -37,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 'students',
+    'students.apps.StudentsConfig',
+    'departments.apps.DepartmentsConfig',
 ]
 
 MIDDLEWARE = [

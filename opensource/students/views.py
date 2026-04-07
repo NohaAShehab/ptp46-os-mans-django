@@ -16,9 +16,9 @@ students = [
     {"id": 2, "name": "Karim", "salary": 20000},
     {"id": 3, "name": "Abdelhamid", "salary": 30000},
 ]
-
-def index(request):
-    return HttpResponse(students)
+#
+# def index(request):
+#     return HttpResponse(students)
 
 #
 # def profile(request, id):
@@ -47,3 +47,19 @@ def profile(request, id ):
         return HttpResponse(student[0])
 
     return HttpResponse("Not found")
+
+
+def index(request):
+    # return HttpResponse(students)
+    # return template index.html
+    return render(request, "students/index.html")
+
+
+
+
+
+
+
+
+
+

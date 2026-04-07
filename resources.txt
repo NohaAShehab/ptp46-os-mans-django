@@ -1,0 +1,8 @@
+
+
+1- creating your first project
+https://docs.djangoproject.com/en/6.0/intro/tutorial01/
+
+
+2- create our first template
+https://docs.djangoproject.com/en/6.0/topics/templates/

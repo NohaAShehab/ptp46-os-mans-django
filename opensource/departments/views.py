@@ -5,4 +5,5 @@ from django.http import HttpResponse
 
 
 def landing(request):
-    return HttpResponse("Landing Page")
+    # return HttpResponse("Landing Page")
+    return render(request, 'departments/index.html')
