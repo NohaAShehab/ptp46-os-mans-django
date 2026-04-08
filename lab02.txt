@@ -1,0 +1,19 @@
+
+
+1- connect your project to database
+2- create model for books
+    perform all crud operations for the book
+    each book has
+       book_info -> id,title, breif, image, no_of_page , price, created_at, updated_at
+       book title should be unique
+
+3- search for media file ,, use ImageField in  models, install pillow package
+define media_url , media_root, don't forget add media urls to the Project URL
+
+4- register your application the admin dashboard
+
+5- use django forms NOT MODEL FORMS
+
+6- don't forget to define the validation rules in the models as well as forms.
+
+ENJOY :D
