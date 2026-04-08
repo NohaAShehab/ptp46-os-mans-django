@@ -1,6 +1,7 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.http import HttpResponse
 
+from students.forms import StudentForm
 from students.models import Student
 # Create your views here.
 
@@ -85,7 +86,24 @@ def profile(request, id ):
 
 
 def create(request):
-    return render(request, "students/create.html")
+    # I need django to create html fields
+    form = StudentForm()
+    if request.method == "POST":
+        print(request.POST) # container --> have the data
+        student = Student()
+        student.name = request.POST["name"]
+        student.email = request.POST["email"]
+        student.salary = request.POST["salary"]
+        student.image = request.POST["image"]
+        student.gender = request.POST["gender"]
+        student.age = request.POST["age"]
+        student.save()
+        url = reverse("students.profile", args=[student.id])
+        return redirect(url)
+        # return  HttpResponse("Post request received")
+        return
+    return render(request, "students/create.html",
+                  context={'form': form})
 
 
 

@@ -1,14 +1,93 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-  <form method="POST">
-      {% csrf_token %}
-    <input type="text" name="first_name" placeholder="First name">
-    <input type="submit" value="Submit">
-  </form>
-</body>
-</html>
+{% extends 'layouts/base.html'%}
+
+{% block title %}Create Student{% endblock %}
+
+{% block content %}
+<style>
+    .create-wrapper {
+        padding: 42px 0 60px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .create-card {
+        width: min(620px, 100%);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 26px;
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+    }
+
+    .create-card h1 {
+        font-size: clamp(1.6rem, 3.5vw, 2rem);
+        margin-bottom: 8px;
+    }
+
+    .subtitle {
+        color: var(--muted);
+        margin-bottom: 20px;
+    }
+
+    form p {
+        margin-bottom: 12px;
+    }
+
+    form input,
+    form select,
+    form textarea {
+        width: 100%;
+        margin-top: 6px;
+        padding: 10px 12px;
+        border-radius: 10px;
+        border: 1px solid var(--line);
+        background: #0f1530;
+        color: var(--text);
+    }
+
+    .actions {
+        margin-top: 16px;
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .btn {
+        border: none;
+        border-radius: 10px;
+        padding: 11px 16px;
+        font-weight: 600;
+        font-size: 0.95rem;
+        text-decoration: none;
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, var(--primary), #8d6bff);
+        color: #fff;
+        box-shadow: 0 8px 24px var(--glow);
+    }
+
+    .btn-ghost {
+        border: 1px solid var(--line);
+        color: var(--text);
+        background: transparent;
+    }
+</style>
+
+<section class="create-wrapper">
+    <div class="create-card">
+        <h1>Create New Student</h1>
+        <p class="subtitle">Fill the form below to add a new student record.</p>
+        <form method="POST">
+            {% csrf_token %}
+            {{form}}
+            <div class="actions">
+                <input class="btn btn-primary" type="submit" value="Save Student">
+                <a class="btn btn-ghost" href="/students/">Cancel</a>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}
