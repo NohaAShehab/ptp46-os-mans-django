@@ -1,11 +1,9 @@
 {% extends 'layouts/base.html' %}
 
 
-{% block body %}
-<h1> Hello from departments  Body </h1>
-{% endblock %}
-
-
 {% block content %}
 <h1> Hello from departments </h1>
+{% for dept in departments %}
+    <h2> {{ dept.name }} </h2>
+{% endfor %}
 {% endblock %}

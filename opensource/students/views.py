@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 
+from students.models import Student
 # Create your views here.
 
 def hello_world(request):
@@ -50,26 +51,41 @@ students = [
 
 
 def index(request):
-    # return HttpResponse(students)
-    # send the students to the html page  --> dynamic content
-    # return template index.html
+    # I need to get students from the database
+    students=  Student.objects.all()
+    print(students)
     return render(request, "students/index.html",
                   context={'students': students} )
 
 
 
 
+# def profile(request, id ):
+#     student = Student.objects.filter(id=id)
+#     print(student)
+#     if student:
+#         return render(request, "students/show.html", context={'student': student[0]})
+#
+#     return HttpResponse("Not found")
+
+
+# def profile(request, id ):
+#     student = Student.objects.get(id=id) # one object
+#     print(student)
+#     if student:
+#         return render(request, "students/show.html", context={'student': student})
+#
+#     return HttpResponse("Not found")
+
+
 def profile(request, id ):
-    # <int:id> === do the required casting
-    student  = filter(lambda std:std['id'] == id, students) # filter object
+    student = get_object_or_404(Student, pk=id)
     print(student)
-    student = list(student)
-    print(student)
-    if student:
-        return render(request, "students/show.html", context={'student': student[0]})
+    return render(request, "students/show.html", context={'student': student})
 
-    return HttpResponse("Not found")
 
+def create(request):
+    return render(request, "students/create.html")
 
 
 

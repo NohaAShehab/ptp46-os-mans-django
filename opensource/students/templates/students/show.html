@@ -1,12 +1,79 @@
 {% extends 'layouts/base.html'%}
 {% load static %}
+
+{% block title %}Student Details{% endblock %}
+
 {% block content %}
+    <section class="hero">
+        <div>
+            <h1>Student Profile</h1>
+            <p>
+                Detailed view for the selected student record.
+            </p>
+            <div class="actions">
+                <a href="/students/" class="btn btn-ghost" style="text-decoration: none;">Back to Students</a>
+            </div>
+        </div>
 
-    {{student.id}}
-{{student.name}}
-{{student.salary}}
+        <aside class="hero-card">
+            <h3>{{ student.name }}</h3>
+            <p>Student information card</p>
+            <div class="metrics">
+                <div class="metric">
+                    <strong>{{ student.id }}</strong>
+                    <span>ID</span>
+                </div>
+                <div class="metric">
+                    <strong>{{ student.salary }}</strong>
+                    <span>Salary</span>
+                </div>
+            </div>
+        </aside>
+    </section>
 
-{{student.image}}
+    <section class="features" style="padding-top: 0;">
+        <div class="section-title">
+            <h2>Student Information</h2>
+            <p>Single-student data with profile image and core details.</p>
+        </div>
 
-<img src="{% static 'students/images/pic1.jpeg' %}">
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Field</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ID</td>
+                        <td>{{ student.id }}</td>
+                    </tr>
+                    <tr>
+                        <td>Name</td>
+                        <td>{{ student.name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Salary</td>
+                        <td>{{ student.salary }}</td>
+                    </tr>
+                    <tr>
+                        <td>Image</td>
+                        <td>{{ student.image }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="hero-card" style="margin-top: 18px; width: min(420px, 100%);">
+            <h3>Profile Image</h3>
+            <img
+                src="{% static 'students/images/' %}{{ student.image }}"
+                alt="{{ student.name }}"
+                style="width: 100%; border-radius: 12px; border: 1px solid var(--line); margin-top: 10px;"
+            >
+        </div>
+    </section>
+
 {% endblock %}

@@ -3,6 +3,13 @@
 {% block content %}
 
 <section class="table-section">
+    <a
+        href="{% url 'students.create'%}"
+        class="btn btn-primary"
+        style="display: inline-block; margin-bottom: 14px; text-decoration: none;"
+    >
+        Add New Student
+    </a>
             <div class="section-title">
                 <h2>Students</h2>
                 <p>Registered student data displayed in a clear table format.</p>

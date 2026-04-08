@@ -12,3 +12,38 @@ https://docs.djangoproject.com/en/6.0/howto/static-files/deployment/
 
 4- collect static
 https://docs.djangoproject.com/en/6.0/ref/contrib/staticfiles/
+
+##############################
+Day02: Connect to DB
+https://docs.djangoproject.com/en/6.0/ref/databases/#mysql-notes
+https://pypi.org/project/mysqlclient/
+
+models: https://docs.djangoproject.com/en/6.0/topics/db/models/
+
+
+#####
+make queries (DML)
+https://docs.djangoproject.com/en/6.0/topics/db/queries/
+
+select * from students_student;
+
+Student.objects.all();
+
+
+# get one object by id
+select * from students_student where id=id;
+
+Student.objects.filter(id=id); # list ???
+
+
+##################
+
+use django forms
+https://docs.djangoproject.com/en/6.0/topics/forms/
+
+
+
+
+
+
+
