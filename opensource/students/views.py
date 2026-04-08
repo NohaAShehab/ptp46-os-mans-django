@@ -85,26 +85,52 @@ def profile(request, id ):
     return render(request, "students/show.html", context={'student': student})
 
 
+# def create(request):
+#     # I need django to create html fields
+#     form = StudentForm()
+#     if request.method == "POST":
+#         # you can use form object to validate data ... ?? save cleaned_data ?
+#
+#         form = StudentForm(request.POST)
+#
+#         print(request.POST) # container --> have the data
+#         student = Student()
+#         student.name = request.POST["name"]
+#         student.email = request.POST["email"]
+#         student.salary = request.POST["salary"]
+#         student.image = request.POST["image"]
+#         student.gender = request.POST["gender"]
+#         student.age = request.POST["age"]
+#         student.save()
+#         url = reverse("students.profile", args=[student.id])
+#         return redirect(url)
+#         # return  HttpResponse("Post request received")
+#         return
+#     return render(request, "students/create.html",
+#                   context={'form': form})
+
+
 def create(request):
     # I need django to create html fields
     form = StudentForm()
     if request.method == "POST":
+        # you can use form object to validate data ... ?? save cleaned_data ?
+        form = StudentForm(request.POST)
         print(request.POST) # container --> have the data
-        student = Student()
-        student.name = request.POST["name"]
-        student.email = request.POST["email"]
-        student.salary = request.POST["salary"]
-        student.image = request.POST["image"]
-        student.gender = request.POST["gender"]
-        student.age = request.POST["age"]
-        student.save()
-        url = reverse("students.profile", args=[student.id])
-        return redirect(url)
-        # return  HttpResponse("Post request received")
-        return
+        if form.is_valid():  # check validation rules defined in the forms.py
+            student = Student()
+            print(form.cleaned_data)
+            student.name = form.cleaned_data["name"]
+            student.salary = form.cleaned_data["salary"]
+            student.image = form.cleaned_data["image"]
+            student.age = form.cleaned_data["age"]
+            student.email = form.cleaned_data["email"]
+            student.gender = form.cleaned_data["gender"]
+            student.save()
+            url = reverse("students.profile", args=[student.id])
+            return redirect(url)
     return render(request, "students/create.html",
                   context={'form': form})
-
 
 
 
