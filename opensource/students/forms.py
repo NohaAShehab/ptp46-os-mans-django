@@ -2,6 +2,7 @@
 
 from django import forms
 
+from departments.models import Department
 from students.models import Student
 
 
@@ -13,6 +14,7 @@ class StudentForm(forms.Form):
     image = forms.CharField()
     gender = forms.ChoiceField(choices=[('m', 'Male'), ('f', 'Female')])
     salary = forms.IntegerField()
+    department = forms.ModelChoiceField(queryset=Department.objects.all())
 
 
     # add validation to your form

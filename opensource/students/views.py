@@ -127,6 +127,8 @@ def create(request):
             student.age = form.cleaned_data["age"]
             student.email = form.cleaned_data["email"]
             student.gender = form.cleaned_data["gender"]
+            student.department = form.cleaned_data["department"] # convert id in POST - -> dept. object
+
             student.save()
             url = reverse("students.profile", args=[student.id])
             return redirect(url)
@@ -147,3 +149,17 @@ class CreateStudentView(View):
             return redirect(student.show_url)
 
         return render(request, "students/create.html", context={'form': form})
+
+
+class UpdateStudentView(View):
+    def get(self, request, id):
+        student = get_object_or_404(Student, pk=id)
+        form = StudentModelForm(instance=student)
+        return render(request, "students/update.html", context={'form': form})
+
+
+    def post(self, request, id):
+        student = get_object_or_404(Student, pk=id)
+        form = StudentModelForm(request.POST, request.FILES, instance=student)
+        if form.is_valid():
+            pass

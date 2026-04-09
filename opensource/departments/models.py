@@ -11,7 +11,7 @@ class Department(models.Model):
     logo = models.ImageField(upload_to='departments/logos/', null=True, blank=True)
 
     def __str__(self):
-        return f"{self.name}"
+        return f"{self.name}({self.id})"
 
 
     @classmethod

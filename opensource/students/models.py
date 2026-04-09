@@ -2,7 +2,7 @@ from random import choices
 
 from django.db import models
 from django.shortcuts import reverse
-
+from departments.models import Department
 # Create your models here.
 
 
@@ -17,6 +17,9 @@ class Student(models.Model):
     salary = models.IntegerField(default=5000, null=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
+    department = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True, blank=True,
+                                   related_name='students')
+    # dept  ---> not the id ==> this the department object  of model
 
 
     def __str__(self):
