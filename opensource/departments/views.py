@@ -42,7 +42,7 @@ def create(request):
             department.save()
             # return HttpResponse("Department created successfully")
             # redirect to the show page >>>
-            url = reverse("departments.show", args=[department.id])
+            url = reverse("departments:show", args=[department.id])
             print(url)
             # return HttpResponse("Department created successfully")
             return redirect(url)
