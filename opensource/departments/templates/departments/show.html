@@ -1,0 +1,77 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Department Details{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div>
+        <h1>Department Profile</h1>
+        <p>Detailed view for the selected department.</p>
+        <div class="actions">
+            <a href="{% url 'departments.index' %}" class="btn btn-ghost" style="text-decoration: none;">Back to Departments</a>
+        </div>
+    </div>
+
+    <aside class="hero-card">
+        <h3>{{ department.name }}</h3>
+        <p>Department quick information</p>
+        <div class="metrics">
+            <div class="metric">
+                <strong>{% if department.active %}Active{% else %}Inactive{% endif %}</strong>
+                <span>Status</span>
+            </div>
+            <div class="metric">
+                <strong>{{ department.created_at|date:"Y-m-d" }}</strong>
+                <span>Created</span>
+            </div>
+        </div>
+    </aside>
+</section>
+
+<section class="features" style="padding-top: 0;">
+    <div class="section-title">
+        <h2>Department Information</h2>
+        <p>Single-department data and logo preview.</p>
+    </div>
+
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Field</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>ID</td>
+                    <td>{{ department.id }}</td>
+                </tr>
+                <tr>
+                    <td>Name</td>
+                    <td>{{ department.name }}</td>
+                </tr>
+                <tr>
+                    <td>Description</td>
+                    <td>{{ department.description|default:"-" }}</td>
+                </tr>
+                <tr>
+                    <td>Updated</td>
+                    <td>{{ department.updated_at|date:"Y-m-d H:i" }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    {% if department.logo %}
+    <div class="hero-card" style="margin-top: 18px; width: min(460px, 100%);">
+        <h3>Department Logo</h3>
+        <img
+            src="{{ department.logo.url }}"
+            alt="{{ department.name }}"
+            style="width: 100%; border-radius: 12px; border: 1px solid var(--line); margin-top: 10px;"
+        >
+    </div>
+    {% endif %}
+</section>
+{% endblock %}

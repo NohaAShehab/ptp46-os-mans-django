@@ -2,8 +2,39 @@
 
 
 {% block content %}
-<h1> Hello from departments </h1>
-{% for dept in departments %}
-    <h2> {{ dept.name }} </h2>
-{% endfor %}
+<section class="table-section">
+    <div class="section-title">
+        <h2>Departments</h2>
+        <p>Browse all academic departments in a clean, readable layout.</p>
+    </div>
+
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Status</th>
+                    <th>Created</th>
+                    <th>Description</th>
+                    <th>Show</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for dept in departments %}
+                <tr>
+                    <td>{{ dept.name }}</td>
+                    <td>{% if dept.active %}Active{% else %}Inactive{% endif %}</td>
+                    <td>{{ dept.created_at|date:"Y-m-d" }}</td>
+                    <td>{{ dept.description|default:"-" }}</td>
+                    <td><a href="{% url 'departments.show' dept.id %}">Show</a></td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">No departments available.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
 {% endblock %}
