@@ -1,5 +1,6 @@
 from django.shortcuts import render, reverse ,redirect
 from django.http import HttpResponse, HttpResponseRedirect
+from django.views import View
 
 import departments
 from departments.forms import DepartmentForm
@@ -25,30 +26,30 @@ def index(request):
 
 # create =--> define funciton of create
 
-def create(request):
-    form = DepartmentForm()
-    if request.method == 'POST':
-        form = DepartmentForm(request.POST, request.FILES)
-        if form.is_valid():
-            name = form.cleaned_data['name']
-            description = form.cleaned_data['description']
-            active = form.cleaned_data['active']
-            logo = form.cleaned_data['logo']
-            # department = Department(
-            #     name=name,
-            #     description=description,
-            #     active=active,
-            #     logo=logo
-            # )
-            # department.save()
-            department = Department.objects.create(name=name, description=description,
-                                                   active=active, logo=logo)
-            return redirect(department.show_url)
-
-
-    return render(request, 'departments/create.html',
-                  context={'form': form})
-
+# def create(request):
+#     form = DepartmentForm()
+#     if request.method == 'POST':
+#         form = DepartmentForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             name = form.cleaned_data['name']
+#             description = form.cleaned_data['description']
+#             active = form.cleaned_data['active']
+#             logo = form.cleaned_data['logo']
+#             # department = Department(
+#             #     name=name,
+#             #     description=description,
+#             #     active=active,
+#             #     logo=logo
+#             # )
+#             # department.save()
+#             department = Department.objects.create(name=name, description=description,
+#                                                    active=active, logo=logo)
+#             return redirect(department.show_url)
+#
+#
+#     return render(request, 'departments/create.html',
+#                   context={'form': form})
+#
 
 # def create(request):
 #     form = DepartmentForm()
@@ -84,7 +85,24 @@ def show(request, id):
 
 
 
+class CreateDepartmentView(View):
+    def post(self, request, *args, **kwargs):
+        form = DepartmentForm(request.POST, request.FILES)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            description = form.cleaned_data['description']
+            active = form.cleaned_data['active']
+            logo = form.cleaned_data['logo']
+            department = Department.objects.create(name=name, description=description,
+                                                   active=active, logo=logo)
+            return redirect(department.show_url)
 
+        return render(request, 'departments/create.html', context={'form': form})
+
+    def get(self, request, *args, **kwargs):
+        form = DepartmentForm()
+        return render(request, 'departments/create.html',
+                      context={'form': form})
 
 
 
