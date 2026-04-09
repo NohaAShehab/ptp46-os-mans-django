@@ -1,0 +1,23 @@
+
+complete the previous labs
+
+implement the functionalities of authors all crud operations
+
+each author has
+    - name , email, bio, gender, created_at, updated_at
+
+use the class-based views and the model forms to implement the func.
+
+---------------------
+relationships
+
+implement many to many relationship between author and books,
+inside the author profile, list the books authored by them
+
+modify the book create form to list the available authors.
+
+
+--------------
+bonus: use jazzmine package to customize the admin dashboard
+https://django-jazzmin.readthedocs.io/
+
