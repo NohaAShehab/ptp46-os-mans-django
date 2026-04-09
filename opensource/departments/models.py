@@ -1,5 +1,5 @@
 from django.db import models
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, reverse
 
 # Create your models here.
 class Department(models.Model):
@@ -23,3 +23,9 @@ class Department(models.Model):
     @classmethod
     def get_dept_by_id(cls , id):
         return get_object_or_404(Department , pk=id)
+
+
+    @property
+    def show_url(self):
+        url = reverse("departments:show", args=[self.id])
+        return url

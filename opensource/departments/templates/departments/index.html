@@ -26,7 +26,7 @@
                     <td>{% if dept.active %}Active{% else %}Inactive{% endif %}</td>
                     <td>{{ dept.created_at|date:"Y-m-d" }}</td>
                     <td>{{ dept.description|default:"-" }}</td>
-                    <td><a href="{% url 'departments.show' dept.id %}">Show</a></td>
+                    <td><a href="{{dept.show_url}}">Show</a></td>
                 </tr>
                 {% empty %}
                 <tr>

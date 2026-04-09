@@ -1,6 +1,7 @@
 from django.shortcuts import render, reverse ,redirect
 from django.http import HttpResponse, HttpResponseRedirect
 
+import departments
 from departments.forms import DepartmentForm
 from departments.models import Department
 
@@ -33,19 +34,16 @@ def create(request):
             description = form.cleaned_data['description']
             active = form.cleaned_data['active']
             logo = form.cleaned_data['logo']
-            department = Department(
-                name=name,
-                description=description,
-                active=active,
-                logo=logo
-            )
-            department.save()
-            # return HttpResponse("Department created successfully")
-            # redirect to the show page >>>
-            url = reverse("departments:show", args=[department.id])
-            print(url)
-            # return HttpResponse("Department created successfully")
-            return redirect(url)
+            # department = Department(
+            #     name=name,
+            #     description=description,
+            #     active=active,
+            #     logo=logo
+            # )
+            # department.save()
+            department = Department.objects.create(name=name, description=description,
+                                                   active=active, logo=logo)
+            return redirect(department.show_url)
 
 
     return render(request, 'departments/create.html',
