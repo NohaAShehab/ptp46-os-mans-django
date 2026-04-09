@@ -114,7 +114,7 @@
     <div class="create-card">
         <h1>Create New Student</h1>
         <p class="subtitle">Fill the form below to add a new student record.</p>
-        <form method="POST">
+        <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{form}}
             <div class="actions">

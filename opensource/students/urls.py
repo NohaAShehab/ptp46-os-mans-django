@@ -1,7 +1,7 @@
 
 from django.urls import path
 
-from students.views import hello_world, index, profile, create
+from students.views import hello_world, index, profile, create, CreateStudentView
 
 urlpatterns = [
     # students
@@ -10,4 +10,5 @@ urlpatterns = [
     # path('profile/<id>', profile, name='profile'),
     path('profile/<int:id>', profile, name='students.profile'),
     path('create',create, name='students.create' ),
+    path("create/forms", CreateStudentView.as_view(), name="students.create_forms"),
 ]

@@ -43,6 +43,9 @@ https://docs.djangoproject.com/en/6.0/topics/forms/
 
 
 
+########### using class based views
+https://docs.djangoproject.com/en/6.0/topics/class-based-views/intro/
+
 
 
 

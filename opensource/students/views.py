@@ -1,7 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.http import HttpResponse
+from django.views import View
 
-from students.forms import StudentForm
+from students.forms import StudentForm , StudentModelForm
 from students.models import Student
 # Create your views here.
 
@@ -134,4 +135,15 @@ def create(request):
 
 
 
+class CreateStudentView(View):
+    def get(self, request):
+        form  = StudentModelForm()
+        return render(request, "students/create.html", context={'form': form})
 
+    def post(self, request):
+        form = StudentModelForm(request.POST, request.FILES)
+        if form.is_valid():
+            student = form.save() # save object
+            return redirect(student.show_url)
+
+        return render(request, "students/create.html", context={'form': form})

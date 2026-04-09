@@ -68,8 +68,9 @@
 
         <div class="hero-card" style="margin-top: 18px; width: min(420px, 100%);">
             <h3>Profile Image</h3>
+            {{student.image}}
             <img
-                src="{% static 'students/images/' %}{{ student.image }}"
+                src="{{student.image_url}}"
                 alt="{{ student.name }}"
                 style="width: 100%; border-radius: 12px; border: 1px solid var(--line); margin-top: 10px;"
             >
