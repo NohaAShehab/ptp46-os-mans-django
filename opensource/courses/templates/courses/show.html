@@ -1,0 +1,87 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}{{ object.name }} — Course{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div>
+        <h1>{{ object.name }}</h1>
+        <p>{{ object.description|truncatewords:40 }}</p>
+        <div class="actions">
+            <a
+                href="{% url 'courses:index' %}"
+                class="btn btn-ghost"
+                style="text-decoration: none;"
+            >
+                Back to Courses
+            </a>
+        </div>
+    </div>
+
+    <aside class="hero-card">
+        <h3>Course summary</h3>
+        <p>Key facts for this course.</p>
+        <div class="metrics">
+            <div class="metric">
+                <strong>{{ object.max_grade }}</strong>
+                <span>Max grade</span>
+            </div>
+            <div class="metric">
+                <strong>{{ object.created_at|date:"Y-m-d"|default:"-" }}</strong>
+                <span>Created</span>
+            </div>
+        </div>
+    </aside>
+</section>
+
+<section class="features" style="padding-top: 0;">
+    <div class="section-title">
+        <h2>Course details</h2>
+        <p>Full information for this record.</p>
+    </div>
+
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Field</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Name</td>
+                    <td>{{ object.name }}</td>
+                </tr>
+                <tr>
+                    <td>Description</td>
+                    <td>{{ object.description }}</td>
+                </tr>
+                <tr>
+                    <td>Max grade</td>
+                    <td>{{ object.max_grade }}</td>
+                </tr>
+                <tr>
+                    <td>Created</td>
+                    <td>{{ object.created_at|date:"Y-m-d H:i"|default:"-" }}</td>
+                </tr>
+                <tr>
+                    <td>Updated</td>
+                    <td>{{ object.updated_at|date:"Y-m-d H:i"|default:"-" }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    {% if object.cover %}
+    <div class="hero-card" style="margin-top: 18px; width: min(420px, 100%);">
+        <h3>Cover image</h3>
+        <img
+            src="{{ object.cover.url }}"
+            alt="{{ object.name }}"
+            style="width: 100%; border-radius: 12px; border: 1px solid var(--line); margin-top: 10px;"
+        >
+    </div>
+    {% endif %}
+</section>
+{% endblock %}

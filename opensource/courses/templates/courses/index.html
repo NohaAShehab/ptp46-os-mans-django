@@ -1,0 +1,49 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Courses{% endblock %}
+
+{% block content %}
+<section class="table-section">
+    <a
+        href="{% url 'courses:create' %}"
+        class="btn btn-primary"
+        style="display: inline-block; margin-bottom: 14px; text-decoration: none;"
+    >
+        Add New Course
+    </a>
+
+    <div class="section-title">
+        <h2>Courses</h2>
+        <p>All courses offered, with key details in one place.</p>
+    </div>
+
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Max grade</th>
+                    <th>Created</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for course in object_list %}
+                <tr>
+                    <td>{{ course.name }}</td>
+                    <td>{{ course.description|truncatewords:18 }}</td>
+                    <td>{{ course.max_grade }}</td>
+                    <td>{{ course.created_at|date:"Y-m-d"|default:"-" }}</td>
+                    <td><a href="{% url 'courses:detail' course.pk %}">Show</a></td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">No courses yet. Create one to get started.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}
