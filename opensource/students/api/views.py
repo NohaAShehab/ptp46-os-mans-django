@@ -4,7 +4,7 @@ from rest_framework import status
 
 from students.models import Student
 # from django.http import JsonResponse
-from students.api.serializers import StudentSerializer
+from students.api.serializers import StudentSerializer, StudentModelSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
@@ -92,6 +92,38 @@ def student_operartions(request, pk):
 
     else:
         return Response(student_serializer.data, status=status.HTTP_200_OK)
+
+
+
+
+
+
+###########################
+@api_view(['GET', 'POST'])
+def students(request):
+    if request.method == 'GET':
+        students = Student.objects.all()
+        students = StudentModelSerializer(students, many=True)
+        print(students.data)
+
+        return Response(students.data, status=status.HTTP_200_OK)
+
+    elif request.method == 'POST':
+        # send data to the serializer so it will create new object
+        serializer = StudentModelSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.create(**serializer.validated_data)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+
+
+
+
+
 
 
 

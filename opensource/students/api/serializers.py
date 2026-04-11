@@ -55,5 +55,21 @@ class StudentSerializer(serializers.Serializer):
 
 
 
+class StudentModelSerializer(serializers.ModelSerializer):
+    department_name = serializers.CharField(required=False, read_only=True, source='department')
+    department = DepartmentSerializer(read_only=True)
+    department_id = serializers.IntegerField(allow_null=True, required=False)
+    class Meta:
+        model = Student
+        fields = '__all__'
+
+
+    def create(self, **validated_data):
+        print(validated_data)
+        student = Student.objects.create(**validated_data)
+        student.save()
+        return StudentModelSerializer(student)
+
+
 
 
