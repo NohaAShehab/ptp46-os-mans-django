@@ -1,3 +1,5 @@
+from traceback import print_stack
+
 from rest_framework import status
 
 from students.models import Student
@@ -37,16 +39,59 @@ def index(request):
     return Response(serialized_students.data, status=status.HTTP_200_OK)
 
 # create ?
+# @api_view(['POST'])
+# def create(request):
+#     print(request)
+#     print(request.data, type(request.data))
+#     # create object
+#     student = Student.objects.create(**request.data)
+#     # serialize the created object
+#     serialized_student = StudentSerializer(student)
+#     # accept data from form ?? ---> saveing as new object
+#     return Response(serialized_student.data, status=status.HTTP_201_CREATED)
+
+
+
+# send data to the serializer
+"""
+
+{'id': [ErrorDetail(string='This field is required.', code='required')], 
+'image': [ErrorDetail(string='No file was submitted.', code='required')], 
+'salary': [ErrorDetail(string='This field is required.', code='required')]}
+"""
 @api_view(['POST'])
 def create(request):
-    print(request)
-    print(request.data, type(request.data))
-    # create object
-    student = Student.objects.create(**request.data)
-    # serialize the created object
-    serialized_student = StudentSerializer(student)
-    # accept data from form ?? ---> saveing as new object
-    return Response(serialized_student.data, status=status.HTTP_201_CREATED)
+    serializer = StudentSerializer(data=request.data)
+    if serializer.is_valid():
+        # student= Student.objects.create(**serializer.validated_data)
+        # serialized_student = StudentSerializer(student)
+        student = serializer.create(**serializer.validated_data)
+        # serialized_student = StudentSerializer(student)
+        return Response(student.data, status=status.HTTP_201_CREATED)
+    else:
+        print(serializer.errors)
+
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+@api_view(['PUT', 'DELETE', 'GET'])
+def student_operartions(request, pk):
+    student = Student.objects.get(pk=pk)
+    student_serializer = StudentSerializer(student)
+
+    if request.method == 'PUT':
+        serializer = StudentSerializer(data=request.data)
+        if serializer.is_valid():
+            student_serializer.update(student, **serializer.validated_data)
+            return Response(student_serializer.data, status=status.HTTP_200_OK)
+
+    elif request.method == 'DELETE':
+        student.delete()
+        return Response({"deleted": "ok"},status=status.HTTP_204_NO_CONTENT)
+
+    else:
+        return Response(student_serializer.data, status=status.HTTP_200_OK)
 
 
 
