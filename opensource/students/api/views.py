@@ -112,8 +112,8 @@ def students(request):
         # send data to the serializer so it will create new object
         serializer = StudentModelSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.create(**serializer.validated_data)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            student =serializer.create(**serializer.validated_data)
+            return Response(student.data, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
