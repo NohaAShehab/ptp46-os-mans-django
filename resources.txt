@@ -55,6 +55,9 @@ authentication system --> in django .... ??
 
 
 
+### API
+django-rest-framework.org/tutorial/1-serialization/#setting-up-a-new-environment
+
 
 
 

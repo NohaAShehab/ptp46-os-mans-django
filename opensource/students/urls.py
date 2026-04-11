@@ -1,5 +1,5 @@
 
-from django.urls import path
+from django.urls import path, include
 
 from students.views import hello_world, index, profile, create, CreateStudentView
 
@@ -11,4 +11,5 @@ urlpatterns = [
     path('profile/<int:id>', profile, name='students.profile'),
     path('create',create, name='students.create' ),
     path("create/forms", CreateStudentView.as_view(), name="students.create_forms"),
+    path('api/', include('students.api.urls')),
 ]
