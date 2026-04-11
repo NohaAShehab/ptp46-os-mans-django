@@ -1,0 +1,62 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Signed out{% endblock %}
+
+{% block content %}
+<style>
+    .logout-wrapper {
+        padding: 42px 0 60px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .logout-card {
+        width: min(440px, 100%);
+        background: linear-gradient(180deg, #ffffff, #f7faff);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 28px;
+        box-shadow: 0 14px 34px rgba(60, 89, 170, 0.12);
+        text-align: center;
+    }
+
+    .logout-card h1 {
+        font-size: clamp(1.45rem, 3vw, 1.8rem);
+        margin-bottom: 10px;
+    }
+
+    .logout-card .subtitle {
+        color: var(--muted);
+        font-size: 0.95rem;
+        margin-bottom: 24px;
+        line-height: 1.55;
+    }
+
+    .logout-card .actions {
+        justify-content: center;
+    }
+
+    .logout-card .btn-primary {
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .logout-card .btn-ghost {
+        text-decoration: none;
+        display: inline-block;
+    }
+</style>
+
+<section class="logout-wrapper">
+    <div class="logout-card">
+        <h1>You’re signed out</h1>
+        <p class="subtitle">
+            Your session has ended. You can sign in again anytime, or continue browsing the site.
+        </p>
+        <div class="actions">
+            <a href="{% url 'login' %}" class="btn btn-primary">Sign in again</a>
+            <a href="/students/" class="btn btn-ghost">Students</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.http import HttpResponse
 from django.views import View
+from django.contrib.auth.decorators import login_required
 
 from students.forms import StudentForm , StudentModelForm
 from students.models import Student
@@ -110,7 +111,7 @@ def profile(request, id ):
 #     return render(request, "students/create.html",
 #                   context={'form': form})
 
-
+@login_required(login_url="/accounts/login/")
 def create(request):
     # I need django to create html fields
     form = StudentForm()

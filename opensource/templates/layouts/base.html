@@ -36,34 +36,116 @@
             margin: 0 auto;
         }
 
-        header {
-            padding: 26px 0;
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 14px 0;
             border-bottom: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(10px);
         }
 
         .nav {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 16px;
+            gap: 20px;
+            flex-wrap: wrap;
         }
 
         .brand {
             font-size: 1.2rem;
             font-weight: 700;
             letter-spacing: 0.4px;
+            color: var(--text);
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .brand:hover {
+            color: var(--primary);
         }
 
         .brand span {
             color: var(--accent);
         }
 
-        .nav ul {
+        .nav-menu {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+            min-width: 0;
+        }
+
+        .nav-links {
             list-style: none;
             display: flex;
-            gap: 18px;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 4px 8px;
+        }
+
+        .nav-links > li > a {
+            display: inline-block;
+            padding: 8px 14px;
+            border-radius: 10px;
             color: var(--muted);
-            font-size: 0.95rem;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: background 0.15s ease, color 0.15s ease;
+        }
+
+        .nav-links > li > a:hover {
+            background: #eef2ff;
+            color: var(--text);
+        }
+
+        .nav-links .nav-profile {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .nav-links .nav-profile:hover {
+            background: rgba(79, 109, 245, 0.1);
+            color: var(--primary);
+        }
+
+        .nav-links .nav-login {
+            background: linear-gradient(135deg, var(--primary), #8d6bff);
+            color: #fff;
+            box-shadow: 0 4px 14px var(--glow);
+        }
+
+        .nav-links .nav-login:hover {
+            filter: brightness(1.06);
+            color: #fff;
+        }
+
+        .nav-logout-form {
+            display: inline;
+            margin: 0;
+        }
+
+        .nav-btn-logout {
+            display: inline-block;
+            padding: 8px 14px;
+            border-radius: 10px;
+            border: 1px solid var(--line);
+            background: #fff;
+            color: var(--text);
+            font: inherit;
+            font-weight: 500;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background 0.15s ease, border-color 0.15s ease;
+        }
+
+        .nav-btn-logout:hover {
+            background: #f5f8ff;
+            border-color: #c8d6f5;
         }
 
         .hero {
@@ -249,22 +331,35 @@
                 grid-template-columns: 1fr;
             }
 
-            .nav ul {
-                display: none;
+            .nav-links {
+                justify-content: flex-start;
             }
         }
     </style>
 </head>
 <body>
-    <header>
+    <header class="site-header">
         <div class="container nav">
-            <div class="brand">Student<span>Hub</span></div>
-            <ul>
-                <li>Home</li>
-                <li>Programs</li>
-                <li>Departments</li>
-                <li>Contact</li>
-            </ul>
+            <a href="{% url 'students.index' %}" class="brand">Student<span>Hub</span></a>
+            <nav class="nav-menu" aria-label="Main navigation">
+                <ul class="nav-links">
+                    <li><a href="{% url 'students.index' %}">Home</a></li>
+                    <li><a href="{% url 'courses:index' %}">Courses</a></li>
+                    <li><a href="{% url 'departments:index' %}">Departments</a></li>
+                    <li><a href="#">Contact</a></li>
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'accounts:profile' %}" class="nav-profile">{{ user.get_username }}</a></li>
+                    <li>
+                        <form class="nav-logout-form" method="post" action="{% url 'logout' %}">
+                            {% csrf_token %}
+                            <button type="submit" class="nav-btn-logout">Log out</button>
+                        </form>
+                    </li>
+                    {% else %}
+                    <li><a href="{% url 'login' %}" class="nav-login">Log in</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
         </div>
     </header>
 

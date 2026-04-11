@@ -1,0 +1,119 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Sign in{% endblock %}
+
+{% block content %}
+<style>
+    .login-wrapper {
+        padding: 42px 0 60px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .login-card {
+        width: min(420px, 100%);
+        background: linear-gradient(180deg, #ffffff, #f7faff);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 28px;
+        box-shadow: 0 14px 34px rgba(60, 89, 170, 0.12);
+    }
+
+    .login-card h1 {
+        font-size: clamp(1.5rem, 3vw, 1.85rem);
+        margin-bottom: 6px;
+    }
+
+    .login-card .subtitle {
+        color: var(--muted);
+        font-size: 0.95rem;
+        margin-bottom: 22px;
+    }
+
+    .login-card form p {
+        margin-bottom: 14px;
+    }
+
+    .login-card form label {
+        display: block;
+        font-weight: 600;
+        font-size: 0.9rem;
+        margin-bottom: 4px;
+        color: var(--text);
+    }
+
+    .login-card form input[type="text"],
+    .login-card form input[type="password"] {
+        width: 100%;
+        margin-top: 4px;
+        padding: 10px 12px;
+        border-radius: 10px;
+        border: 1px solid var(--line);
+        background: #ffffff;
+        color: var(--text);
+        font-size: 1rem;
+    }
+
+    .login-card form ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .login-card .errorlist {
+        margin: 0 0 14px;
+        padding: 10px 12px;
+        border-radius: 10px;
+        border: 1px solid #fecaca;
+        background: #fff1f2;
+        color: #b91c1c;
+        font-size: 0.92rem;
+    }
+
+    .login-card .errorlist li + li {
+        margin-top: 4px;
+    }
+
+    .login-card .non-field-errors .errorlist {
+        margin-bottom: 16px;
+    }
+
+    .login-actions {
+        margin-top: 20px;
+    }
+
+    .login-actions .btn-primary {
+        width: 100%;
+        border: none;
+        border-radius: 10px;
+        padding: 12px 16px;
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        background: linear-gradient(135deg, var(--primary), #8d6bff);
+        color: #fff;
+        box-shadow: 0 8px 24px var(--glow);
+    }
+</style>
+
+<section class="login-wrapper">
+    <div class="login-card">
+        <h1>Sign in</h1>
+        <p class="subtitle">Enter your account credentials to continue.</p>
+
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            {% if form.non_field_errors %}
+            <div class="non-field-errors">{{ form.non_field_errors }}</div>
+            {% endif %}
+            {{ form.as_p }}
+            {% if next %}
+            <input type="hidden" name="next" value="{{ next }}">
+            {% endif %}
+            <div class="login-actions">
+                <input class="btn-primary" type="submit" value="Login">
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

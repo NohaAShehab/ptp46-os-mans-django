@@ -47,6 +47,22 @@ https://docs.djangoproject.com/en/6.0/topics/forms/
 https://docs.djangoproject.com/en/6.0/topics/class-based-views/intro/
 
 ############## generic views
+https://docs.djangoproject.com/en/6.0/topics/class-based-views/generic-display/
+
+
+###########
+authentication system --> in django .... ??
+
+
+
+
+
+
+
+
+
+
+
 
 
 

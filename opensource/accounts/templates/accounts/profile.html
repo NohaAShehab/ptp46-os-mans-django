@@ -1,0 +1,94 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}My profile{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<section class="hero">
+    <div>
+        <h1>
+            {% if user.get_full_name %}
+                {{ user.get_full_name }}
+            {% else %}
+                {{ user.username }}
+            {% endif %}
+        </h1>
+        <p>Signed in as <strong>{{ user.username }}</strong>. Below is the information stored on your account.</p>
+        <div class="actions">
+            <a href="{% url 'logout' %}" class="btn btn-ghost" style="text-decoration: none;">Log out</a>
+            <a href="/students/" class="btn btn-primary" style="text-decoration: none;">Students</a>
+        </div>
+    </div>
+
+    <aside class="hero-card">
+        <h3>Account</h3>
+        <p>Quick summary</p>
+        <div class="metrics">
+            <div class="metric">
+                <strong>{% if user.is_staff %}Yes{% else %}No{% endif %}</strong>
+                <span>Staff</span>
+            </div>
+            <div class="metric">
+                <strong>{% if user.is_superuser %}Yes{% else %}No{% endif %}</strong>
+                <span>Superuser</span>
+            </div>
+        </div>
+    </aside>
+</section>
+
+<section class="features" style="padding-top: 0;">
+    <div class="section-title">
+        <h2>Profile details</h2>
+        <p>Fields from your Django user record.</p>
+    </div>
+
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Field</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Username</td>
+                    <td>{{ user.username }}</td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>{{ user.email|default:"—" }}</td>
+                </tr>
+                <tr>
+                    <td>First name</td>
+                    <td>{{ user.first_name|default:"—" }}</td>
+                </tr>
+                <tr>
+                    <td>Last name</td>
+                    <td>{{ user.last_name|default:"—" }}</td>
+                </tr>
+                <tr>
+                    <td>Date joined</td>
+                    <td>{{ user.date_joined|date:"Y-m-d H:i" }}</td>
+                </tr>
+                <tr>
+                    <td>Last login</td>
+                    <td>{% if user.last_login %}{{ user.last_login|date:"Y-m-d H:i" }}{% else %}—{% endif %}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+{% else %}
+<section class="table-section">
+    <div class="section-title">
+        <h2>Profile</h2>
+        <p>You need to be signed in to view this page.</p>
+    </div>
+    <div class="actions">
+        <a href="{% url 'login' %}" class="btn btn-primary" style="text-decoration: none;">Sign in</a>
+        <a href="/students/" class="btn btn-ghost" style="text-decoration: none;">Back to Students</a>
+    </div>
+</section>
+{% endif %}
+{% endblock %}
