@@ -1,8 +1,11 @@
 from django.urls import path
 from students.api.views import index, create, student_operartions, students
+from students.api.routers import  router
 urlpatterns = [
     path('', index, name='index'),
     path('create/', create, name='create'),
     path('<int:pk>', student_operartions, name='student_operartions'),
     path('model', students, name='students'),
-]
+    # register router
+
+] + router.urls

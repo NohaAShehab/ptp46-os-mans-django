@@ -1,6 +1,6 @@
 from traceback import print_stack
 
-from rest_framework import status
+from rest_framework import status, viewsets
 
 from students.models import Student
 # from django.http import JsonResponse
@@ -119,6 +119,13 @@ def students(request):
 
 
 
+
+
+
+
+class StudentViewSet(viewsets.ModelViewSet):
+    queryset = Student.objects.all()
+    serializer_class = StudentModelSerializer
 
 
 
